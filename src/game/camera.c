@@ -5407,6 +5407,8 @@ BAD_RETURN(s32) cutscene_enter_bowser_arena_init(UNUSED struct Camera *c) {
     rotate_and_move_vec3f(c->pos, sMarioCamState->pos, 0, 0, 0x7A12);
     c->pos[1] += 50.0f;
     c->pos[2] -= 60.0f;
+
+    vec3f_copy(sCutsceneVars[0].point, c->pos); // save position
 }
 
 /**
@@ -5432,8 +5434,26 @@ BAD_RETURN(s32) cutscene_enter_bowser_arena_end(struct Camera *c) {
  * Cutscene that plays when mario enters a bowser fight.
  */
 BAD_RETURN(s32) cutscene_enter_bowser_arena(struct Camera *c) {
+    Vec3f rotatedPos;
+    f32 baseDist;
+    s16 basePitch, baseYaw, finalYaw;
+    
     cutscene_event(cutscene_enter_bowser_arena_init, c, 0, 0);
     cutscene_event(cutscene_enter_bowser_arena_follow_mario, c, 0, 83);
+
+    mode_boss_fight_camera(c);
+
+    vec3f_get_dist_and_angle(sMarioCamState->pos, sCutsceneVars[0].point, &baseDist, &basePitch, &baseYaw);
+
+    finalYaw = baseYaw + (sModeOffsetYaw * 4);
+
+    vec3f_set_dist_and_angle(sMarioCamState->pos, rotatedPos, baseDist, basePitch, finalYaw);
+    vec3f_copy(c->pos, rotatedPos);
+
+    c->focus[0] = sMarioCamState->pos[0];
+    c->focus[1] = gMarioState->pos[1] + gMarioObject->hitboxHeight;
+    c->focus[2] = sMarioCamState->pos[2];
+
 }
 
 /**
