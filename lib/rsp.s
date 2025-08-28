@@ -10,7 +10,7 @@ glabel rspF3DBootStart
 glabel rspF3DBootEnd
 
 .balign 16
-glabel rspF3DStart /* Use regular Fast3D bins (default) */
+glabel rspF3DStart
     .incbin "lib/PR/102695/gspFast3D.text.bin"
 glabel rspF3DEnd
 
