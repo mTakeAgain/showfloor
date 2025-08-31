@@ -17,7 +17,7 @@
 
 - Yep.
 
-If there are any more questions regarding this project, we invite you to join our [Discord Server.](https://discord.gg/FbMFSKVTv2)
+If there are any more questions regarding this project, we invite you to join our [Discord Server.](https://discord.gg/CpxaEqg6ww)
 
 ## Credits
 
@@ -41,6 +41,7 @@ If there are any more questions regarding this project, we invite you to join ou
 
 #### Research & Playtesting
 - Scraps
+- duskewl/jadu
 - `K-Dubs΄
   
 ### Contributors
@@ -53,17 +54,18 @@ If there are any more questions regarding this project, we invite you to join ou
 - RetroDev
 - Fluvian
 - skibidigurt
+- Woohale54
 - diesel64
 - Holo
 - toonjoey
+- Lurondor
   
 ### Special Thanks
 - icehotlemonade
 - Neverax
 - na0micakes
-- duskewl/jadu
 - Matsilagi
-- darkestafterglo
+- lunr
 - Tony (Hard4Games)
 - aaali
 
@@ -83,7 +85,7 @@ If there are any more questions regarding this project, we invite you to join ou
 
 #### Research & Playtesting
 - Xiartic
-- darkestafterglo
+- lunr
   
 ### Original 'The Preservation Project' Contributors
 - 1up Guy
