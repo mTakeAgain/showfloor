@@ -11,7 +11,11 @@ glabel rspF3DBootEnd
 
 .balign 16
 glabel rspF3DStart
-    .incbin "lib/PR/102695/gspFast3D.text.bin"
+    #ifdef FAST3D_20E
+        .incbin "lib/PR/2.0E/gspFast3D.text.bin"
+    #else
+        .incbin "lib/PR/102695/gspFast3D.text.bin"
+    #endif
 glabel rspF3DEnd
 
 /* Audio Bins */
@@ -27,7 +31,11 @@ glabel rspAspMainEnd
 
 .balign 16
 glabel rspF3DDataStart
-    .incbin "lib/PR/102695/gspFast3D.data.bin"
+    #ifdef FAST3D_20E
+        .incbin "lib/PR/2.0E/gspFast3D.data.bin"
+    #else
+        .incbin "lib/PR/102695/gspFast3D.data.bin"
+    #endif
 glabel rspF3DDataEnd
 
 /* Audio Data */

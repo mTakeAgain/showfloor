@@ -41,6 +41,16 @@ OPT_FLAGS := -g
 
 TARGET := sm64.$(VERSION)
 
+# GRUCODE - selects which RSP microcode to use.
+#   f3d_102695 - gspFast3D from Ultra 64 OS release 102695 (from U64 Aging Cartridge), incompatible with HLE plugins
+#   f3d_20E - gspFast3D from OS 2.0E (from bbgames's ostrees), compatible with HLE plugins
+GRUCODE ?= f3d_102695
+$(eval $(call validate-option,GRUCODE,f3d_102695 f3d_20E))
+
+ifeq ($(GRUCODE),f3d_20E)
+  DEFINES += FAST3D_20E=1
+endif
+
 # USE_QEMU_IRIX - when ido is selected, select which way to emulate IRIX programs
 #   1 - use qemu-irix
 #   0 - statically recompile the IRIX programs

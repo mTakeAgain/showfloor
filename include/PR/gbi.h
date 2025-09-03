@@ -1091,11 +1091,21 @@ typedef union {
  * an immediate word will be stored.
  *
  */
+#ifdef FAST3D_20E
+#define G_MW_MATRIX		0x00	/* NOTE: also used by movemem */
+#define G_MW_NUMLIGHT		0x02
+#define G_MW_CLIP		0x04
+#define G_MW_SEGMENT		0x06
+#define G_MW_FOG		0x08
+#define G_MW_LIGHTCOL		0x0a
+#define	G_MW_POINTS		0x0c
+#else
 #define G_MW_NUMLIGHT	0x00
 #define G_MW_CLIP	0x02
 #define G_MW_SEGMENT	0x04
 #define G_MW_FOG	0x06
 #define G_MW_LIGHTCOL	0x08
+#endif
 
 /*
  * These are offsets from the address in the dmem table
@@ -1627,6 +1637,14 @@ typedef union {
 	_SHIFT(c, 24) | _SHIFT(p0, 8) | _SHIFT(p1, 0), _SHIFT(dat, 0)	\
 }
 
+#ifdef FAST3D_20E
+#define gMoveWd(pkt, index, offset, data)				\
+	gImmp21(pkt, G_MOVEWORD, offset, index, data)
+
+#define gsMoveWd(    index, offset, data)				\
+	gsImmp21(    G_MOVEWORD, offset, index, data)
+#endif
+
 /*
  * Note: the SP1Triangle() and line macros multiply the vertex indices
  * by 10, this is an optimization for the microcode.
@@ -1688,8 +1706,15 @@ typedef union {
 	_SHIFT(((0x0f & (vend+1))*40),0)				\
 }
 
+#ifdef FAST3D_20E
+#define gSPSegment(pkt, segment, base)					\
+	gMoveWd(pkt, G_MW_SEGMENT, (segment*4), base)
+#define gsSPSegment(segment, base)					\
+	gsMoveWd(    G_MW_SEGMENT, (segment*4), base)
+#else
 #define gSPSegment(pkt, segment, base)	gImmp21(pkt, G_MOVEWORD, G_MW_SEGMENT, (segment*4), base)
 #define gsSPSegment(segment, base)	gsImmp21(    G_MOVEWORD, G_MW_SEGMENT, (segment*4), base)
+#endif
 
 /*
  * Clipping Macros
@@ -1709,6 +1734,65 @@ typedef union {
 /*
  * r should be one of: FRUSTRATIO_1, FRUSTRATIO_2, FRUSTRATIO_3, ... FRUSTRATIO_6
  */
+#ifdef FAST3D_20E
+#define gSPClipRatio(pkt, r)						\
+{									\
+	gMoveWd(pkt, G_MW_CLIP, G_MWO_CLIP_RNX, FR_NEG_##r);		\
+	gMoveWd(pkt, G_MW_CLIP, G_MWO_CLIP_RNY, FR_NEG_##r);		\
+	gMoveWd(pkt, G_MW_CLIP, G_MWO_CLIP_RPX, FR_POS_##r);		\
+	gMoveWd(pkt, G_MW_CLIP, G_MWO_CLIP_RPY, FR_POS_##r);		\
+}
+
+#define gsSPClipRatio(r)						\
+	gsMoveWd(G_MW_CLIP, G_MWO_CLIP_RNX, FR_NEG_##r),		\
+	gsMoveWd(G_MW_CLIP, G_MWO_CLIP_RNY, FR_NEG_##r),		\
+	gsMoveWd(G_MW_CLIP, G_MWO_CLIP_RPX, FR_POS_##r),		\
+	gsMoveWd(G_MW_CLIP, G_MWO_CLIP_RPY, FR_POS_##r)
+
+/*
+ * Insert values into Matrix
+ *
+ * where = element of matrix (byte offset)
+ * num   = new element (32 bit value replacing 2 int or 2 frac matrix 
+ *                                 componants
+ */
+#define gSPInsertMatrix(pkt, where, num)				\
+	gMoveWd(pkt, G_MW_MATRIX, where, num)
+
+#define gsSPInsertMatrix(where, num)					\
+	gsMoveWd(G_MW_MATRIX, where, num)
+
+/*
+ * Load new matrix directly
+ *
+ * mptr = pointer to matrix
+ */
+#define	gSPForceMatrix(pkt, mptr)					\
+{									\
+	gDma1p(pkt, G_MOVEMEM, mptr,              16, G_MV_MATRIX_1);	\
+	gDma1p(pkt, G_MOVEMEM, (char *)(mptr)+16, 16, G_MV_MATRIX_2);	\
+	gDma1p(pkt, G_MOVEMEM, (char *)(mptr)+32, 16, G_MV_MATRIX_3);	\
+	gDma1p(pkt, G_MOVEMEM, (char *)(mptr)+48, 16, G_MV_MATRIX_4);	\
+}
+#define	gsSPForceMatrix(mptr)						\
+	gsDma1p(    G_MOVEMEM, mptr,              16, G_MV_MATRIX_1),	\
+	gsDma1p(    G_MOVEMEM, (char *)(mptr)+16, 16, G_MV_MATRIX_2),	\
+	gsDma1p(    G_MOVEMEM, (char *)(mptr)+32, 16, G_MV_MATRIX_3),	\
+	gsDma1p(    G_MOVEMEM, (char *)(mptr)+48, 16, G_MV_MATRIX_4)
+
+/*
+ * Insert values into Points
+ *
+ * point = point number 0-15
+ * where = which element of point to modify (byte offset into point)
+ * num   = new value (32 bit)
+ */
+#define	gSPModifyVertex(pkt, vtx, where, val)				\
+	gMoveWd(pkt, G_MW_POINTS, (vtx*40)+where, val)
+
+#define	gsSPModifyVertex(vtx, where, val)				\
+	gsMoveWd(G_MW_POINTS, (vtx*40)+where, val)
+#else
 #define gSPClipRatio(pkt, r)						\
 {									\
 	gImmp21(pkt, G_MOVEWORD, G_MW_CLIP, G_MWO_CLIP_RNX, FR_NEG_##r)	\
@@ -1730,6 +1814,7 @@ typedef union {
  */
 #define	gSPNearClip(pkt, nc)	gImmp21(pkt, G_MOVEWORD, G_MW_CLIP, G_MWO_CLIP_Z, nc)
 #define	gsSPNearClip(nc)	gsImmp21(    G_MOVEWORD, G_MW_CLIP, G_MWO_CLIP_Z, nc)
+#endif
 
 /*
  * Lighting Macros
@@ -1748,8 +1833,15 @@ typedef union {
  * n should be one of: NUMLIGHTS_0, NUMLIGHTS_1, ..., NUMLIGHTS_7
  * NOTE: in addition to the number of directional lights specified, there is always 1 ambient light
  */
+#ifdef FAST3D_20E
+#define gSPNumLights(pkt, n)						\
+	gMoveWd(pkt, G_MW_NUMLIGHT, G_MWO_NUMLIGHT, NUML(n))
+#define gsSPNumLights(n)						\
+	gsMoveWd(    G_MW_NUMLIGHT, G_MWO_NUMLIGHT, NUML(n))
+#else
 #define gSPNumLights(pkt, n)	gImmp21(pkt, G_MOVEWORD, G_MW_NUMLIGHT, G_MWO_NUMLIGHT, NUML(n))
 #define gsSPNumLights(n)	gsImmp21(    G_MOVEWORD, G_MW_NUMLIGHT, G_MWO_NUMLIGHT, NUML(n))
+#endif
 
 #define LIGHT_1		1
 #define LIGHT_2		2
@@ -1775,6 +1867,16 @@ typedef union {
  * col is a 32 bit word with r,g,b,a (alpha is ignored)
  * n should be one of LIGHT_1, LIGHT_2, ..., LIGHT_8
  */
+#ifdef FAST3D_20E
+#define gSPLightColor(pkt, n, col)					\
+{									\
+	gMoveWd(pkt, G_MW_LIGHTCOL, G_MWO_a##n, col);			\
+	gMoveWd(pkt, G_MW_LIGHTCOL, G_MWO_b##n, col);			\
+}
+#define gsSPLightColor(n, col)						\
+	gsMoveWd(G_MW_LIGHTCOL, G_MWO_a##n, col),			\
+	gsMoveWd(G_MW_LIGHTCOL, G_MWO_b##n, col)
+#else
 #define gSPLightColor(pkt, n, col)					\
 {									\
 	gImmp21(pkt, G_MOVEWORD, G_MW_LIGHTCOL, G_MWO_a##n, col);	\
@@ -1783,6 +1885,7 @@ typedef union {
 #define gsSPLightColor(n, col)						\
 	gsImmp21(G_MOVEWORD, G_MW_LIGHTCOL, G_MWO_a##n, col),	\
 	gsImmp21(G_MOVEWORD, G_MW_LIGHTCOL, G_MWO_b##n, col)
+#endif
 
 /* These macros use a structure "name" which is init'd with the gdSPDefLights macros*/
 
@@ -1964,6 +2067,25 @@ typedef union {
  * max is where fog is thickest (usually 1000)
  * 
  */
+#ifdef FAST3D_20E
+#define gSPFogFactor(pkt, fm, fo)				\
+        gMoveWd(pkt, G_MW_FOG, G_MWO_FOG, 			\
+		(_SHIFT(fm&0xffff,16) | _SHIFT(fo&0xffff,0)))
+
+#define gsSPFogFactor(fm, fo)					\
+        gsMoveWd(G_MW_FOG, G_MWO_FOG, 				\
+		(_SHIFT(fm&0xffff,16) | _SHIFT(fo&0xffff,0)))
+
+#define gSPFogPosition(pkt, min, max)				\
+	gMoveWd(pkt, G_MW_FOG, G_MWO_FOG, 			\
+		(_SHIFT((128000/(max-min))&0xffff,16) |		\
+		_SHIFT(((500-min)*256/(max-min))&0xffff,0)))
+
+#define gsSPFogPosition(min, max)				\
+	gsMoveWd(G_MW_FOG, G_MWO_FOG, 				\
+		(_SHIFT((128000/(max-min))&0xffff,16) |		\
+		_SHIFT(((500-min)*256/(max-min))&0xffff,0)))
+#else
 #define gSPFogFactor(pkt, fm, fo)	gImmp21(pkt, G_MOVEWORD, G_MW_FOG, G_MWO_FOG, 	\
 					_SHIFT(fm&0xffff,16)|_SHIFT(fo&0xffff,0))
 #define gsSPFogFactor(fm, fo)		gsImmp21(    G_MOVEWORD, G_MW_FOG, G_MWO_FOG, 	\
@@ -1975,6 +2097,7 @@ typedef union {
 #define gsSPFogPosition(min, max)	gsImmp21(    G_MOVEWORD, G_MW_FOG, G_MWO_FOG, 	\
 					_SHIFT((128000/(max-min))&0xffff,16)|		\
 					_SHIFT(((500-min)*256/(max-min))&0xffff,0))
+#endif
 
 /*
  * Macros to turn texture on/off

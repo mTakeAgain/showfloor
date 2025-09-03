@@ -232,9 +232,9 @@ void create_gfx_task_structure(void) {
     gGfxSPTask->msgqueue = &gGfxVblankQueue;
     gGfxSPTask->msg = (OSMesg) 2;
     gGfxSPTask->task.t.type = M_GFXTASK;
+    gGfxSPTask->task.t.flags = 2;
     gGfxSPTask->task.t.ucode_boot = rspF3DBootStart;
     gGfxSPTask->task.t.ucode_boot_size = ((u8 *) rspF3DBootEnd - (u8 *) rspF3DBootStart);
-    gGfxSPTask->task.t.flags = 2;
     gGfxSPTask->task.t.ucode = rspF3DStart;
     gGfxSPTask->task.t.ucode_data = rspF3DDataStart;
     gGfxSPTask->task.t.ucode_size = SP_UCODE_SIZE; // (this size is ignored)
