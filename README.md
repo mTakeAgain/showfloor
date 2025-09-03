@@ -45,7 +45,6 @@ If there are any more questions regarding this project, we invite you to join ou
 - `K-Dubs΄
   
 ### Contributors
-- SuperGarlic64
 - emlimate
 - XKoop7321
 - xerox
@@ -60,9 +59,11 @@ If there are any more questions regarding this project, we invite you to join ou
 - toonjoey
 - Lurondor
 - sonicdude143
+- Diamond Hero
+- Xiartic
+- icehotlemonade
   
 ### Special Thanks
-- icehotlemonade
 - Neverax
 - na0micakes
 - Matsilagi
