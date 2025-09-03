@@ -34,6 +34,9 @@
 #include "make_const_nonconst.h"
 #include "behavior_data.h"
 
+#define _SHIFTL(v, s, w)	\
+    ((unsigned int) (((unsigned int)(v) & ((0x01 << (w)) - 1)) << (s)))
+
 #define BC_B(a) _SHIFTL(a, 24, 8)
 #define BC_BB(a, b) (_SHIFTL(a, 24, 8) | _SHIFTL(b, 16, 8))
 #define BC_BBBB(a, b, c, d) (_SHIFTL(a, 24, 8) | _SHIFTL(b, 16, 8) | _SHIFTL(c, 8, 8) | _SHIFTL(d, 0, 8))
@@ -43,7 +46,6 @@
 #define BC_HH(a, b) (_SHIFTL(a, 16, 16) | _SHIFTL(b, 0, 16))
 #define BC_W(a) ((uintptr_t)(u32)(a))
 #define BC_PTR(a) ((uintptr_t)(a))
-
 
 // Defines the start of the behavior script as well as the object list the object belongs to.
 // Has some special behavior for certain objects.
