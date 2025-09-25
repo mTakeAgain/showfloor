@@ -892,13 +892,25 @@ void radial_camera_move(struct Camera *c) {
         } else {
             if (c->mode == CAMERA_MODE_RADIAL) {
                 // sModeOffsetYaw only updates when mario is moving
-                if ((gCurrLevelNum == LEVEL_LLL) && gMarioStates[0].pos[2] < 6300
+
+                /* 
+                    this is a hacky workaround!! 
+                    level specific tweaks to the camera like this are probably not the best way to go about this 
+                    TODO: rewrite 
+                */
+
+                if (gCurrLevelNum == LEVEL_LLL) { 
+                    if (gMarioStates[0].pos[2] < 6300
                     && gMarioStates[0].pos[2] > 4300 && gMarioStates[0].pos[0] < 280) { // stupid
-                    rotateSpeed = 25.f;
-                } else {
+                        rotateSpeed = 25.f;
+                    }
+                } if (gCurrLevelNum == LEVEL_WF) {
                     rotateSpeed = gMarioStates[0].forwardVel
                                   + 768.f; // TODO: check whether this is wrong or not later
+                } else { 
+                    rotateSpeed = gMarioStates[0].forwardVel / 32.f * 128.f;
                 }
+                
                 camera_approach_s16_symmetric_bool(&sModeOffsetYaw, yawOffset, rotateSpeed);
             }
         }
