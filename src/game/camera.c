@@ -685,8 +685,8 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
 
         approach_camera_height(c, goalHeight, 5.f);
     } else {
-        camFloorHeight = find_floor(c->pos[0], c->pos[1] + 100.f, c->pos[2], &surface) + baseOff;
-        marioFloorHeight = baseOff + sMarioGeometry.currFloorHeight;
+        camFloorHeight = find_floor(c->pos[0], c->pos[1] + 500.f, c->pos[2], &surface) + baseOff;
+        marioFloorHeight = baseOff + sMarioGeometry.currFloorHeight; 
 
         if (camFloorHeight < marioFloorHeight) {
             camFloorHeight = marioFloorHeight;
@@ -1254,9 +1254,10 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
 
     calc_y_to_curr_floor(&focusFloorOff, 1.f, 200.f, &focusFloorOff, 0.9f, 200.f);
     vec3f_copy(focus, sMarioCamState->pos);
-    focus[1] += focusFloorOff + 125.f;
+    focus[1] += focusFloorOff + 130.f;
     vec3f_get_dist_and_angle(focus, c->pos, &distCamToFocus, &faceAngle[0], &faceAngle[1]);
     faceAngle[2] = 0;
+    focus[0] -= 5.f;
 
     vec3f_copy(basePos, sFixedModeBasePosition);
     vec3f_add(basePos, sCastleEntranceOffset);
@@ -1268,8 +1269,8 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
         goalHeight = gLakituState.goalPos[1];
     }
 
-    if (300 > distCamToFocus) {
-        goalHeight += 300 - distCamToFocus;
+    if (250.f > distCamToFocus) {
+        goalHeight += 500.f - (distCamToFocus * 2.f);
     }
 
     ceilHeight = find_ceil(c->pos[0], goalHeight - 100.f, c->pos[2], &ceiling);
@@ -1280,7 +1281,7 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
     }
 
     if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT) {
-        goalHeight += 424.f;
+        goalHeight += 400.f;
     }
 
     if (sStatusFlags & CAM_FLAG_SMOOTH_MOVEMENT) {
@@ -2816,7 +2817,7 @@ void init_camera(struct Camera *c) {
     vec3f_copy(gLakituState.pos, c->pos);
     vec3f_copy(gLakituState.focus, c->focus);
     if (c->mode == CAMERA_MODE_FIXED) {
-        vec3f_set(sFixedModeBasePosition, 724.f, 150.f, 883.f);
+        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, 847.0f);
     }
     store_lakitu_cam_info_for_c_up(c);
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);
@@ -4664,7 +4665,7 @@ void check_blocking_area_processing(const u8 *mode) {
 BAD_RETURN(s32) cam_castle_enter_lobby(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        vec3f_set(sFixedModeBasePosition, 724.f, 150.f, 883.f);
+        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, 847.0f);
         c->mode = CAMERA_MODE_FIXED;
     }
 }
@@ -6759,7 +6760,7 @@ void approach_fov_45(struct MarioState *m) {
     f32 targetFoV = sFOVState.fov;
 
     if (m->area->camera->mode == CAMERA_MODE_FIXED && m->area->camera->cutscene == 0) {
-        targetFoV = 60.f;
+        targetFoV = 63.f;
     } else {
         targetFoV = 45.f;
     }
