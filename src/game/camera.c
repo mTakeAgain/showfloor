@@ -4136,11 +4136,6 @@ void handle_c_button_movement(struct Camera *c) {
             play_sound_cbutton_up();
         } else {
             set_mode_c_up(c);
-            if (sZeroZoomDist > gCameraZoomDist) {
-                sZoomAmount = -gCameraZoomDist;
-            } else {
-                sZoomAmount = gCameraZoomDist;
-            }
         }
     }
     // Zoom out
