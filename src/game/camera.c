@@ -721,11 +721,8 @@ s16 look_down_slopes(s16 camYaw) {
 
     floorDY = find_floor(xOff, sMarioCamState->pos[1], zOff, &floor) - sMarioCamState->pos[1];
 
-    if (floor != NULL) {
-        if (floor->type != SURFACE_WALL_MISC && floorDY > 0) {
-            // Add the slope's angle of declination to the pitch
-            pitch += atan2s(40.f, floorDY);
-        }
+    if (floorDY > 0) {
+        pitch += atan2s(40.f, floorDY);
     }
 
     return pitch;
@@ -892,12 +889,10 @@ void radial_camera_move(struct Camera *c) {
         } else {
             if (c->mode == CAMERA_MODE_RADIAL) {
                 // sModeOffsetYaw only updates when mario is moving
-                if ((gCurrLevelNum == LEVEL_LLL) && gMarioStates[0].pos[2] < 6300
-                    && gMarioStates[0].pos[2] > 4300 && gMarioStates[0].pos[0] < 280) { // stupid
-                    rotateSpeed = 25.f;
+                if (gMarioStates[0].floor->type == SURFACE_WALL_MISC) {
+                    rotateSpeed = 25.f;  // On a specific surface type (kinda dumber)
                 } else {
-                    rotateSpeed = gMarioStates[0].forwardVel
-                                  + 768.f; // TODO: check whether this is wrong or not later
+                    rotateSpeed = 770.f;
                 }
                 camera_approach_s16_symmetric_bool(&sModeOffsetYaw, yawOffset, rotateSpeed);
             }
