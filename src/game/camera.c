@@ -890,9 +890,9 @@ void radial_camera_move(struct Camera *c) {
             if (c->mode == CAMERA_MODE_RADIAL) {
                 // sModeOffsetYaw only updates when mario is moving
                 if (gMarioStates[0].floor->type == SURFACE_WALL_MISC) {
-                    rotateSpeed = 32.f;  // On a specific surface type (kinda dumber)
+                    rotateSpeed = gMarioStates[0].forwardVel;
                 } else {
-                    rotateSpeed = 770.f;
+                    rotateSpeed = gMarioStates[0].forwardVel + 768.f;
                 }
                 camera_approach_s16_symmetric_bool(&sModeOffsetYaw, yawOffset, rotateSpeed);
             }
