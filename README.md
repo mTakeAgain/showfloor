@@ -61,12 +61,12 @@ For more questions, join our [Discord server](https://discord.gg/CpxaEqg6ww).
 - elinspectorardilla
 
 #### Additional Programming
-- umm.heather
+- ummheather
 - iProgramInCpp
 
 #### Assets
 - Scraps
-- umm.heather
+- ummheather
 - 1up Guy
 - stalechilibeans
 - `K-Dubs΄

@@ -686,7 +686,7 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
         approach_camera_height(c, goalHeight, 5.f);
     } else {
         camFloorHeight = find_floor(c->pos[0], c->pos[1] + 200.f, c->pos[2], &surface) + baseOff;
-        marioFloorHeight = baseOff + sMarioGeometry.currFloorHeight; 
+        marioFloorHeight = baseOff + sMarioGeometry.currFloorHeight;
 
         if (camFloorHeight < marioFloorHeight) {
             camFloorHeight = marioFloorHeight;
@@ -4715,8 +4715,7 @@ u32 set_mode_if_not_set_by_surface(struct Camera *c, u8 mode) {
 /**
  * Terminates a list of CameraTriggers.
  */
-#define NULL_TRIGGER                                                                                   \
-    { 0, NULL, 0, 0, 0, 0, 0, 0, 0 }
+#define NULL_TRIGGER { 0, NULL, 0, 0, 0, 0, 0, 0, 0 }
 
 /**
  * The Castle triggers are used to set the camera to fixed mode when entering the lobby, and to set it
@@ -5418,7 +5417,8 @@ BAD_RETURN(s32) cutscene_enter_bowser_arena_follow_mario(struct Camera *c) {
 
     mode_boss_fight_camera(c);
 
-    vec3f_get_dist_and_angle(sMarioCamState->pos, sCutsceneVars[0].point, &baseDist, &basePitch, &baseYaw);
+    vec3f_get_dist_and_angle(sMarioCamState->pos, sCutsceneVars[0].point, &baseDist, &basePitch,
+                             &baseYaw);
 
     finalYaw = baseYaw + (sModeOffsetYaw * 4);
 
@@ -5428,7 +5428,6 @@ BAD_RETURN(s32) cutscene_enter_bowser_arena_follow_mario(struct Camera *c) {
     c->focus[0] = sMarioCamState->pos[0];
     c->focus[1] = gMarioState->pos[1] + gMarioObject->hitboxHeight;
     c->focus[2] = sMarioCamState->pos[2];
-
 }
 
 /**
