@@ -2782,7 +2782,7 @@ void init_camera(struct Camera *c) {
             gCameraMovementFlags |= CAM_MOVE_ZOOMED_OUT;
             break;
         case LEVEL_CASTLE:
-            marioOffset[2] = 150.f;
+            marioOffset[2] = 190.f;
             break;
     }
     if (c->mode == CAMERA_MODE_8_DIRECTIONS) {
