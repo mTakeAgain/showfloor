@@ -1,6 +1,6 @@
 const Collision castle_inside_collision[] = {
 	COL_INIT(),
-	COL_VERTEX_INIT(1077),
+	COL_VERTEX_INIT(1081),
 	COL_VERTEX(-358, 410, -5759),
 	COL_VERTEX(-358, 1434, -3020),
 	COL_VERTEX(-358, 410, -3020),
@@ -1078,7 +1078,11 @@ const Collision castle_inside_collision[] = {
 	COL_VERTEX(-307, 0, -1074),
 	COL_VERTEX(-307, 0, -50),
 	COL_VERTEX(307, 0, -50),
-	COL_TRI_INIT(SURFACE_DEFAULT, 1349),
+	COL_VERTEX(179, 0, -5836),
+	COL_VERTEX(-179, 0, -5836),
+	COL_VERTEX(-179, 0, -5528),
+	COL_VERTEX(179, 0, -5528),
+	COL_TRI_INIT(SURFACE_DEFAULT, 1353),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 3, 4),
 	COL_TRI(5, 3, 6),
@@ -2428,6 +2432,10 @@ const Collision castle_inside_collision[] = {
 	COL_TRI(1036, 1018, 508),
 	COL_TRI(1073, 1074, 1075),
 	COL_TRI(1073, 1075, 1076),
+	COL_TRI(1077, 1078, 1079),
+	COL_TRI(1077, 1079, 1080),
+	COL_TRI(54, 59, 57),
+	COL_TRI(54, 57, 56),
 	COL_TRI_STOP(),
 	COL_END()
 };
