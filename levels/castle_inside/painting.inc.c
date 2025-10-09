@@ -613,7 +613,7 @@ struct Painting ccm_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     90.0f,
-    /* Position */ -3078.0f,   410.0f,    343.0f,
+    /* Position */ -3149.0f,   410.0f,   -1919.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
