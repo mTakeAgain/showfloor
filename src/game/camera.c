@@ -2812,7 +2812,7 @@ void init_camera(struct Camera *c) {
     vec3f_copy(gLakituState.pos, c->pos);
     vec3f_copy(gLakituState.focus, c->focus);
     if (c->mode == CAMERA_MODE_FIXED) {
-        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1513.0f);
+        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1420.0f);
     }
     store_lakitu_cam_info_for_c_up(c);
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);
@@ -4660,7 +4660,7 @@ void check_blocking_area_processing(const u8 *mode) {
 BAD_RETURN(s32) cam_castle_enter_lobby(struct Camera *c) {
     if (c->mode != CAMERA_MODE_FIXED) {
         sStatusFlags &= ~CAM_FLAG_SMOOTH_MOVEMENT;
-        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1513.0f);
+        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1420.0f);
         c->mode = CAMERA_MODE_FIXED;
     }
 }
@@ -6274,17 +6274,16 @@ BAD_RETURN(s32) cutscene_door_move_behind_mario(struct Camera *c) {
     determine_pushing_or_pulling_door(&doorRotation);
     set_focus_rel_mario(c, 0.f, 125.f, 0.f, 0);
     vec3s_set(sCutsceneVars[0].angle, 0, sMarioCamState->faceAngle[1] + doorRotation, 0);
-    vec3f_set(camOffset, 0.f, 125.f, 208.f);
+    vec3f_set(camOffset, 0.f, 125.f, 250.f);
 
     if (doorRotation == 0) { // pulling door
         camOffset[0] = 120.f;
         camOffset[1] = 40.f;
         camOffset[2] = 280.f;
     } else { // pushing door
-        camOffset[0] = -75.f;
-        camOffset[1] = 25.f;
+        camOffset[0] = -85.f;
+        camOffset[1] = 30.f;
     }
-
     offset_rotated(c->pos, sMarioCamState->pos, camOffset, sCutsceneVars[0].angle);
 }
 
@@ -6298,11 +6297,12 @@ BAD_RETURN(s32) cutscene_door_follow_mario(struct Camera *c) {
     set_focus_rel_mario(c, 0.f, 125.f, 0.f, 0);
     vec3f_get_dist_and_angle(c->focus, c->pos, &dist, &pitch, &yaw);
 
-    camera_approach_f32_symmetric_bool(&dist, 200.f, 10.f);
+    camera_approach_f32_symmetric_bool(&dist, 225.f, 10);
     camera_approach_s16_symmetric_bool(&pitch, 0, 96);
+    //camera_approach_s16_symmetric_bool(&yaw, 0, 16);
 
     vec3f_set_dist_and_angle(c->focus, c->pos, dist, pitch, yaw);
-    update_camera_yaw(c);
+    
 }
 
 /**
@@ -6314,7 +6314,6 @@ BAD_RETURN(s32) cutscene_door_end(struct Camera *c) {
     } else {
         c->mode = CAMERA_MODE_CLOSE;
     }
-
     c->cutscene = 0;
     gCutsceneTimer = CUTSCENE_STOP;
     sStatusFlags |= CAM_FLAG_SMOOTH_MOVEMENT;
@@ -6367,7 +6366,7 @@ struct Cutscene sCutsceneDoorWarp[] = { { cutscene_door_start, 1 },
 struct Cutscene sCutsceneDoorPull[] = {
     { cutscene_door_start, 1 },         { cutscene_door_fix_cam, 29 },
     { unused_cam_to_mario, 1 },         { cutscene_door_move_behind_mario, 1 },
-    { cutscene_door_follow_mario, 50 }, { cutscene_door_end, 0 }
+    { cutscene_door_follow_mario, 27 }, { cutscene_door_end, 0 }
 };
 
 /**
@@ -6376,7 +6375,7 @@ struct Cutscene sCutsceneDoorPull[] = {
 struct Cutscene sCutsceneDoorPush[] = {
     { cutscene_door_start, 1 },         { cutscene_door_fix_cam, 19 },
     { unused_cam_to_mario, 1 },         { cutscene_door_move_behind_mario, 1 },
-    { cutscene_door_follow_mario, 50 }, { cutscene_door_end, 0 }
+    { cutscene_door_follow_mario, 27 }, { cutscene_door_end, 0 }
 };
 
 /**
