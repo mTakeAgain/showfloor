@@ -4726,25 +4726,25 @@ u32 set_mode_if_not_set_by_surface(struct Camera *c, u8 mode) {
  */
 struct CameraTrigger sCamCastle[] = {
     // Door Entrance
-    { 1, cam_castle_enter_lobby, 0, 0, 1024, 300, 150, 300, 0 },
+    { 1, cam_castle_enter_lobby, 0, 0, -1236, 300, 150, 300, 0 },
     // Snow Slider Room Exit
-    { 1, cam_castle_enter_lobby, -1550, 208, 8, 140, 150, 140, 0x4000 },
+    { 1, cam_castle_enter_lobby, -1550, 208, -2252, 140, 150, 140, 0x4000 },
     // Water Land Room Exit
-    { 1, cam_castle_enter_lobby, 1550, 208, 8, 140, 150, 140, -0x4000 },
+    { 1, cam_castle_enter_lobby, 1550, 208, -2252, 140, 150, 140, -0x4000 },
     // Mountain Room Exit
-    { 1, cam_castle_enter_lobby, -934, 0, -556, 140, 150, 140, 0 },
+    { 1, cam_castle_enter_lobby, -934, 0, -2816, 140, 150, 140, 0 },
     // Fire Bubble Room Exit
-    { 1, cam_castle_enter_lobby, 934, 0, -556, 140, 150, 140, 0 },
+    { 1, cam_castle_enter_lobby, 934, 0, -2816, 140, 150, 140, 0 },
     // Bowser Hallway Exit
-    { 1, cam_castle_enter_lobby, 0, 426, -407, 140, 150, 140, 0 },
+    { 1, cam_castle_enter_lobby, 0, 426, -2667, 140, 150, 140, 0 },
     // Hallway Exit 1
-    { 1, cam_castle_enter_lobby, 399, 0, -336, 140, 150, 140, -0x2000 },
+    { 1, cam_castle_enter_lobby, 399, 0, -2596, 140, 150, 140, -0x2000 },
     // Hallway Exit 2
-    { 1, cam_castle_enter_lobby, -399, 0, -336, 140, 150, 140, 0x2000 },
+    { 1, cam_castle_enter_lobby, -399, 0, -2596, 140, 150, 140, 0x2000 },
     // Bowser Hallway Warp Enter
-    { 1, cam_castle_close_mode, 0, 634, -2921, 140, 150, 140, 0 },
+    { 1, cam_castle_close_mode, 0, 634, -5181, 140, 150, 140, 0 },
     // Hallway Warp Enter
-    { 1, cam_castle_close_mode, 0, 0, -2831, 140, 150, 140, 0 },
+    { 1, cam_castle_close_mode, 0, 0, -5091, 140, 150, 140, 0 },
     NULL_TRIGGER
 };
 

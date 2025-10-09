@@ -122,7 +122,7 @@ const LevelScript level_castle_inside_entry[] = {
     END_AREA(),
 
     FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 180, /*pos*/ 0, 0, 340),
+    MARIO_POS(/*area*/ 1, /*yaw*/ 180, /*pos*/ 0, 0, -1920),
     CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
     CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
     CLEAR_LEVEL(),
