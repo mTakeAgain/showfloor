@@ -640,7 +640,7 @@ struct Painting wf_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     0.0f,
-    /* Position */ -1255.0f,  -208.0f, -2145.0f,
+    /* Position */ -1254.0f,  -205.0f, -4684.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
