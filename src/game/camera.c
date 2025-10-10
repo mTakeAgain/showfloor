@@ -1763,7 +1763,9 @@ s16 update_default_camera(struct Camera *c) {
         if (sCSideButtonYaw == 0) {
             nextYawVel = 0x1000;
             sYawSpeed = 0;
+            if (sMarioCamState->unused != 1) {
             vec3f_get_dist_and_angle(sMarioCamState->pos, c->pos, &dist, &pitch, &yaw);
+            }
         }
     }
 
@@ -1843,6 +1845,12 @@ s16 update_default_camera(struct Camera *c) {
         } else {
             posHeight = 100.f;
         }
+    }
+
+    if (xzDist < 180.f && sMarioCamState->unused == 1) {
+        c->pos[1] = marioFloorHeight + (300 - xzDist);
+    } else if (xzDist > 300.f && sMarioCamState->unused != 0) {
+        sMarioCamState->unused = 0;
     }
 
     // Make lakitu fly above the gas
@@ -6028,6 +6036,7 @@ BAD_RETURN(s32) cutscene_intro_end(struct Camera *c) {
         } else {
         sStatusFlags |= (CAM_FLAG_SMOOTH_MOVEMENT | CAM_FLAG_UNUSED_CUTSCENE_ACTIVE);
         gCutsceneTimer = CUTSCENE_STOP;
+        sMarioCamState->unused = 1;
         c->cutscene = 0;
         }
     }
