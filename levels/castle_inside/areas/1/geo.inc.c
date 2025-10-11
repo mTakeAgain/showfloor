@@ -160,7 +160,7 @@ const GeoLayout castle_geo[] = {
                   GEO_BRANCH(1, castle_geo_bowser_hallway),
                   //GEO_BRANCH(1, castle_geo_lobby_to_fire_bubble),
                   GEO_BRANCH(1, castle_geo_fire_bubble_room),
-                  //GEO_BRANCH(1, castle_geo_lobby_to_water_land),
+                  GEO_BRANCH(1, castle_geo_lobby_to_water_land),
                   //GEO_BRANCH(1, castle_geo_lobby_to_snow_slider),
                   GEO_BRANCH(1, castle_geo_snow_slider_room),
                   //GEO_BRANCH(1, castle_geo_lobby_to_hallway),
