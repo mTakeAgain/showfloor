@@ -1591,7 +1591,9 @@ s16 update_slide_camera(struct Camera *c) {
         vec3f_set_dist_and_angle(c->focus, pos, maxCamDist + sLakituDist, camPitch, camYaw);
         c->pos[0] = pos[0];
         c->pos[2] = pos[2];
-        camera_approach_f32_symmetric_bool(&c->pos[1], c->focus[1], 30.f);
+        if (gMarioStates[0].action != ACT_FORWARD_AIR_KB && gMarioStates[0].actionArg != 2) {
+            camera_approach_f32_symmetric_bool(&c->pos[1], c->focus[1], 30.f);
+        }
         vec3f_get_dist_and_angle(c->pos, c->focus, &distCamToFocus, &camPitch, &camYaw);
         pitchScale = (distCamToFocus - maxCamDist + sLakituDist) / 10000.f;
         if (pitchScale > 1.f) {
