@@ -151,15 +151,15 @@ const GeoLayout castle_geo[] = {
          GEO_OPEN_NODE(),
             GEO_CAMERA(13, 0, 2000, 6000, 0, 0, 0, geo_camera_main),
             GEO_OPEN_NODE(),
-               GEO_SWITCH_CASE(3, geo_switch_area),
+               GEO_SWITCH_CASE(3, geo_switch_area), //areas 6 and 7's places are supposed to be switched but fast64 says otherwise. haha get it 67 funny
                GEO_OPEN_NODE(),
                   GEO_BRANCH(1, castle_geo_lobby),
                   GEO_BRANCH(1, castle_geo_lobby_to_mountain),
                   GEO_BRANCH(1, castle_geo_mountain_room),
                   GEO_BRANCH(1, castle_geo_lobby_to_bowser),
                   GEO_BRANCH(1, castle_geo_bowser_hallway),
-                  GEO_BRANCH(1, castle_geo_lobby_to_fire_bubble),
-                  GEO_BRANCH(1, castle_geo_fire_bubble_room),
+                  GEO_BRANCH(1, castle_geo_fire_bubble_room), // area 7
+                  GEO_BRANCH(1, castle_geo_lobby_to_fire_bubble), // area 6
                   GEO_BRANCH(1, castle_geo_lobby_to_water_land),
                   GEO_BRANCH(1, castle_geo_lobby_to_snow_slider),
                   GEO_BRANCH(1, castle_geo_snow_slider_room),
