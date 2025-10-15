@@ -2812,7 +2812,7 @@ void init_camera(struct Camera *c) {
     vec3f_copy(gLakituState.pos, c->pos);
     vec3f_copy(gLakituState.focus, c->focus);
     if (c->mode == CAMERA_MODE_FIXED) {
-        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1420.0f);
+        vec3f_set(sFixedModeBasePosition, 646.0f, 143.0f, -1513.0f);
     }
     store_lakitu_cam_info_for_c_up(c);
     gLakituState.yaw = calculate_yaw(c->focus, c->pos);

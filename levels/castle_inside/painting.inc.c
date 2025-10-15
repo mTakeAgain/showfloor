@@ -613,7 +613,7 @@ struct Painting ccm_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     90.0f,
-    /* Position */ -3149.0f,   410.0f,   -1919.0f,
+    /* Position */ -3149.0f,   410.0f,   -2012.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -640,7 +640,7 @@ struct Painting wf_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     0.0f,
-    /* Position */ -1254.0f,  -205.0f, -4684.0f,
+    /* Position */ -1254.0f,  -205.0f, -4777.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -667,7 +667,7 @@ struct Painting jrb_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,   270.0f,
-    /* Position */  3149.0f,   410.0f,  -2533.0f,
+    /* Position */  3149.0f,   410.0f,  -2626.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
@@ -694,7 +694,7 @@ struct Painting lll_painting = {
     /* Floor Status */ 0x00, 0x00, 0x00 /* which of the painting's nearby special floors Mario's on */,
     /* Ripple Status */ 0x00,
     /* Rotation */     0.0f,     0.0f,
-    /* Position */   640.0f,  -205.0f, -4683.0f,
+    /* Position */   640.0f,  -205.0f, -4776.0f,
     /*                         curr   passive     entry */
     /* Ripple Magnitude */     0.0f,    20.0f,    80.0f,
     /* Ripple Decay */         1.0f,  0.9608f,  0.9524f,
