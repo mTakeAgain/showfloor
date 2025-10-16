@@ -6279,7 +6279,7 @@ BAD_RETURN(s32) cutscene_door_move_behind_mario(struct Camera *c) {
     if (doorRotation == 0) { // pulling door
         camOffset[0] = 120.f;
         camOffset[1] = 40.f;
-        camOffset[2] = 280.f;
+        camOffset[2] = 195.f; //used to be 280.f
     } else { // pushing door
         camOffset[0] = -85.f;
         camOffset[1] = 30.f;
