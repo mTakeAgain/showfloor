@@ -1229,8 +1229,6 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
     f32 distCamToFocus;
     UNUSED u8 filler2[8];
     f32 scaleToMario = 0.5f;
-    s16 pitch;
-    s16 yaw;
     Vec3s faceAngle;
     struct Surface *ceiling;
     Vec3f basePos;
@@ -1290,14 +1288,6 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
 
     c->pos[0] = basePos[0] + (sMarioCamState->pos[0] - basePos[0]) * scaleToMario;
     c->pos[2] = basePos[2] + (sMarioCamState->pos[2] - basePos[2]) * scaleToMario;
-
-    if (scaleToMario != 0.f) {
-        vec3f_get_dist_and_angle(c->focus, c->pos, &distCamToFocus, &pitch, &yaw);
-        if (distCamToFocus > 1000.f) {
-            distCamToFocus = 1000.f;
-            vec3f_set_dist_and_angle(c->focus, c->pos, distCamToFocus, pitch, yaw);
-        }
-    }
 
     return faceAngle[1];
 }
@@ -4743,7 +4733,7 @@ struct CameraTrigger sCamCastle[] = {
     // Fire Bubble Room Exit
     { 1, cam_castle_enter_lobby, 934, 0, -2909, 140, 150, 140, 0 },
     // Bowser Hallway Exit
-    { 1, cam_castle_enter_lobby, 0, 426, -2760, 140, 150, 140, 0 },
+    { 1, cam_castle_enter_lobby, 0, 426, -2960, 140, 150, 140, 0 },
     // Hallway Exit 1
     { 1, cam_castle_enter_lobby, 399, 0, -2689, 140, 150, 140, -0x2000 },
     // Hallway Exit 2
