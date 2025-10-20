@@ -1153,23 +1153,8 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
             break;
 
         case GROUND_STEP_HIT_WALL:
-            if (!mario_floor_is_slippery(m)) {
-                slide_bonk(m, ACT_GROUND_BONK, endAction);
-            } else if (m->wall != NULL) {
-                s16 wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
-                f32 slideSpeed = sqrtf(m->slideVelX * m->slideVelX + m->slideVelZ * m->slideVelZ);
-
-                if ((slideSpeed *= 0.9) < 4.0f) {
-                    slideSpeed = 4.0f;
-                }
-
-                m->slideYaw = wallAngle - (s16) (m->slideYaw - wallAngle) + 0x8000;
-
-                m->vel[0] = m->slideVelX = slideSpeed * sins(m->slideYaw);
-                m->vel[2] = m->slideVelZ = slideSpeed * coss(m->slideYaw);
-            }
-
-            align_with_floor(m);
+            // verify! may not be the correct handling
+            set_mario_action(m, ACT_STOMACH_SLIDE, 0);
             break;
     }
 }
