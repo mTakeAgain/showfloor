@@ -307,13 +307,6 @@ u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, 
 
     m->actionTimer++;
 
-    if (m->wall != NULL) {
-        s16 wallDYaw = atan2s(m->wall->normal.z, m->wall->normal.x) - m->faceAngle[1];
-        if ((wallDYaw < -0x6000 || wallDYaw > 0x6000) && m->forwardVel > 16) {
-            set_mario_action(m, ACT_AIR_HIT_WALL, 0);
-        }
-    }
-
     stepResult = perform_air_step(m, stepArg);
     switch (stepResult) {
         case AIR_STEP_NONE:
