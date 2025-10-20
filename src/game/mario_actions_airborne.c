@@ -355,7 +355,7 @@ u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, 
                         if (m->forwardVel > 8.0f) {
                             mario_set_forward_vel(m, -8.0f);
                         }
-                        return set_mario_action(m, ACT_SOFT_BONK, 0);
+                        return set_mario_action(m, ACT_AIR_HIT_WALL, 0);
                     }
                 }
             } else {
@@ -1023,7 +1023,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
     }
 
     set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
-    return 0;
+    return FALSE;
 }
 
 s32 act_forward_rollout(struct MarioState *m) {

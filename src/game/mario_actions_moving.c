@@ -1472,10 +1472,6 @@ s32 common_landing_cancels(struct MarioState *m, struct LandingAction *landingAc
 
     m->doubleJumpTimer = landingAction->unk02;
 
-    if (should_begin_sliding(m)) {
-        return set_mario_action(m, landingAction->slideAction, 0);
-    }
-
     if (m->input & INPUT_FIRST_PERSON) {
         return set_mario_action(m, landingAction->endAction, 0);
     }
