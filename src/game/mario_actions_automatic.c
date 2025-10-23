@@ -26,10 +26,13 @@
 
 void add_tree_leaf_particles(struct MarioState *m) {
     f32 leafHeight;
-    leafHeight = 100.0f;
-        
+
+    if (m->usedObj->behavior == segmented_to_virtual(bhvTree)) {
+        leafHeight = 100.0f;
+    }
+
     if (m->pos[1] - m->floorHeight > leafHeight) {
-        m->particleFlags |= PARTICLE_LEAF;    
+        m->particleFlags |= PARTICLE_LEAF;
     }
 }
 
