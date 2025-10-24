@@ -1404,7 +1404,7 @@ void update_mario_health(struct MarioState *m) {
                     m->health -= (terrainIsSnow ? 3 : 1);
                 }
             } else {
-                m->health++;
+                m->health += 0x2;
             }
         }
 
