@@ -45,7 +45,7 @@ void play_climbing_sounds(struct MarioState *m, s32 b) {
                        m->marioObj->header.gfx.cameraToObject);
         }
     } else {
-        play_sound(isOnTree ? SOUND_MOVING_SLIDE_DOWN_TREE : SOUND_MOVING_SLIDE_DOWN_POLE,
+        play_sound(isOnTree ? SOUND_ACTION_CLIMB_DOWN_TREE : SOUND_MOVING_SLIDE_DOWN_POLE,
                    m->marioObj->header.gfx.cameraToObject);
     }
 }
