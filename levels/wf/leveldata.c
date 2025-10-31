@@ -26,8 +26,6 @@
 #include "levels/wf/areas/1/12/model.inc.c"
 #include "levels/wf/areas/1/13/model.inc.c"
 #include "levels/wf/areas/1/14/model.inc.c"
-#include "levels/wf/areas/1/15/2.inc.c"
-#include "levels/wf/areas/1/15/3.inc.c"
 #include "levels/wf/areas/1/15/model.inc.c"
 #include "levels/wf/areas/1/16/model.inc.c"
 

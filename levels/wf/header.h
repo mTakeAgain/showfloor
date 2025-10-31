@@ -44,6 +44,8 @@ extern const Gfx mountain_12_dl_mesh[];
 extern const Gfx mountain_12_lod_dl_mesh[];
 extern const Gfx mountain_13_dl_mesh[];
 extern const Gfx mountain_15_dl_mesh[];
+extern const Gfx mountain_15_shadow_dl_mesh[];
+extern const Gfx mountain_15_lod_dl_mesh[];
 extern const Gfx mountain_16_dl_mesh[];
 extern const Gfx rotating_wooden_platform_decal_dl_mesh[];
 extern const Gfx extending_platform_decal_dl_mesh[];
