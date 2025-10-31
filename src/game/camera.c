@@ -1853,15 +1853,6 @@ s16 update_default_camera(struct Camera *c) {
         }
     }
 
-    /*if (sMarioCamState->action & ACT_FLAG_ON_POLE) {
-        camFloorHeight = gMarioStates[0].usedObj->oPosY + 125.f;
-        if (sMarioCamState->pos[1] - 100.f > camFloorHeight) {
-            camFloorHeight = sMarioCamState->pos[1] - 100.f;
-        }
-        ceilHeight = CELL_HEIGHT_LIMIT;
-        vec3f_copy(c->focus, sMarioCamState->pos);
-    }*/
-
     if (sMarioCamState->action & ACT_FLAG_HANGING || sMarioCamState->action == ACT_RIDING_HOOT) {
         camFloorHeight = sMarioCamState->pos[1] + 400.f;
         if (c->mode == CAMERA_MODE_FREE_ROAM) {
@@ -4042,17 +4033,9 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
                         s2ndRotateFlags |= CAM_MOVE_ROTATE_RIGHT;
                     }
 
-                    if (sModeOffsetYaw == DEGREES(105)) {
-                        play_sound_button_change_blocked();
-                    } else {
-                        play_sound_cbutton_side();
-                    }
+                    play_sound_cbutton_side();
                 } else {
-                    if (sModeOffsetYaw == DEGREES(60)) {
-                        play_sound_button_change_blocked();
-                    } else {
-                        play_sound_cbutton_side();
-                    }
+                    play_sound_cbutton_side();
                 }
             } else {
                 gCameraMovementFlags |= CAM_MOVE_RETURN_TO_MIDDLE;
@@ -4070,18 +4053,10 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
                     if (sModeOffsetYaw < -0x22AA) {
                         s2ndRotateFlags |= CAM_MOVE_ROTATE_LEFT;
                     }
-
-                    if (sModeOffsetYaw == DEGREES(-105)) {
-                        play_sound_button_change_blocked();
-                    } else {
-                        play_sound_cbutton_side();
-                    }
+                    
+                    play_sound_cbutton_side();                   
                 } else {
-                    if (sModeOffsetYaw == DEGREES(-60)) {
-                        play_sound_button_change_blocked();
-                    } else {
-                        play_sound_cbutton_side();
-                    }
+                    play_sound_cbutton_side();
                 }
             } else {
                 gCameraMovementFlags |= CAM_MOVE_RETURN_TO_MIDDLE;
