@@ -4032,11 +4032,8 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
                     if (sModeOffsetYaw > 0x22AA) {
                         s2ndRotateFlags |= CAM_MOVE_ROTATE_RIGHT;
                     }
-
-                    play_sound_cbutton_side();
-                } else {
-                    play_sound_cbutton_side();
                 }
+                play_sound_cbutton_side();
             } else {
                 gCameraMovementFlags |= CAM_MOVE_RETURN_TO_MIDDLE;
                 play_sound_cbutton_up();
@@ -4052,12 +4049,9 @@ s32 radial_camera_input(struct Camera *c, UNUSED f32 unused) {
                     // if < ~48 degrees, we're rotating for the second time.
                     if (sModeOffsetYaw < -0x22AA) {
                         s2ndRotateFlags |= CAM_MOVE_ROTATE_LEFT;
-                    }
-                    
-                    play_sound_cbutton_side();                   
-                } else {
-                    play_sound_cbutton_side();
+                    }                 
                 }
+                play_sound_cbutton_side();
             } else {
                 gCameraMovementFlags |= CAM_MOVE_RETURN_TO_MIDDLE;
                 play_sound_cbutton_up();
